@@ -6,6 +6,24 @@ The aim of this project to support the development of **Windows Phone** and othe
 
 ----------
 
+Table of Contents
+-------------
+
+- [Welcome at the L2PAccess project!](#)
+	- [Usage](#)
+		- [Add to your project](#)
+			- [Step 1 - Download](#)
+			- [Step 2 - Include in solution](#)
+			- [Step 3 - Reference it](#)
+		- [How to use](#)
+			- [Configure](#)
+			- [Your first call](#)
+			- [Enjoy](#)
+	- [Extend](#)
+		- [Adding L2P methods](#)
+			- [Step 1 - Add to the API interface](#)
+			- [Step 2 - Extend the proxy client](#)
+	- [In case of problems](#)
 
 Usage
 -------------
@@ -95,7 +113,7 @@ Now you have added the method to the [Refit](https://github.com/paulcbetts/refit
 ```
 
 Why do you need this? Because ***L2PClient*** makes sure that you don't need the access_token parameter on your method and that it will be injected at runtime.
-Problems
+In case of problems
 -------------------
 If you found some problems with the library or have some ideas what to develop, feel free to leave an issue here: [**Issues page**](https://github.com/gavronek/L2PAccess-Win/issues/)
 
