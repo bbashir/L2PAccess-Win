@@ -1,18 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using L2PAccess.Authentication.Config;
-using L2PAccess.Authentication.Model;
 using L2PAccess.Authentication.Model.Response;
 
 namespace L2PAccess.Authentication
 {
+    /// <summary>
+    /// Automatically injects the access token in an HttpRequest's query parameters and also includes the authentication header. This handler uses the oauthmanager singleton.
+    /// </summary>
     public class OAuthHttpClientHandler : HttpClientHandler
     {
         private readonly OAuthConfig config;

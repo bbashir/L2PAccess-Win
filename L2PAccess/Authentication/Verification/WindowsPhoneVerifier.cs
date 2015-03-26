@@ -6,6 +6,9 @@ using L2PAccess.Authentication.Model.Response;
 
 namespace L2PAccess.Authentication.Verification
 {
+    /// <summary>
+    /// Handle verification on windows phone
+    /// </summary>
     public class WindowsPhoneVerifier
 
 #if WINDOWS_PHONE_APP    

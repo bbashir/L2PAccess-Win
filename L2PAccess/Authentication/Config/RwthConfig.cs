@@ -2,6 +2,9 @@
 
 namespace L2PAccess.Authentication.Config
 {
+    /// <summary>
+    /// Simplified config to access Rwth OAuth server
+    /// </summary>
     public class RwthConfig : OAuthConfig
     {
         public static OAuthConfig Create(string clientId)

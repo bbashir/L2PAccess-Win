@@ -2,6 +2,9 @@
 
 namespace L2PAccess.Authentication
 {
+    /// <summary>
+    /// This is a singlaton class to access the oauth module, so it make sure only 1 instance are refreshing/accessing the access token in different L2P clients.
+    /// </summary>
     public sealed class OAuthManager 
     {
         public OAuth2Module AuthModule { get; set; }

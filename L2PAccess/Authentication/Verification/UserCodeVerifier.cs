@@ -6,6 +6,9 @@ using L2PAccess.Authentication.Model.Response;
 
 namespace L2PAccess.Authentication.Verification
 {
+    /// <summary>
+    /// Abstract class to handle verification of the user code.
+    /// </summary>
     public abstract class UserCodeVerifier
     {
         public async Task<Token> VerifyTask(Code code, Func<WebAuthenticationResult, Code, Task<Token>> fetchAccessTokenAsyncFunc)

@@ -1,19 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Net;
 using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Runtime.Serialization.Json;
-using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using Windows.Security.Authentication.Web;
 using L2PAccess.Authentication.Config;
-using L2PAccess.Authentication.Model;
 using L2PAccess.Authentication.Model.Request;
 using L2PAccess.Authentication.Model.Response;
 using L2PAccess.Authentication.Storage;
@@ -22,6 +13,9 @@ using Refit;
 
 namespace L2PAccess.Authentication
 {
+    /// <summary>
+    /// Responsible for managing OAuth access tokens including fetching new ones/storing/retreiving/refreshing them.
+    /// </summary>
     public class OAuth2Module
     {
         protected ITokenStorage TokenStorage = new SecureTokenStorage();
@@ -75,7 +69,7 @@ namespace L2PAccess.Authentication
             {
                 Token = await TokenStorage.Read();
             }
-            catch (IOException e)
+            catch (IOException)
             {
                 Token = new Token();
             }

@@ -1,23 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Runtime.Serialization.Json;
-using System.Text;
 using System.Threading.Tasks;
 using Windows.Security.Cryptography;
 using Windows.Security.Cryptography.DataProtection;
 using Windows.Storage;
 using Windows.Storage.Streams;
-using L2PAccess.Authentication.Model;
 using L2PAccess.Authentication.Model.Response;
 
 namespace L2PAccess.Authentication.Storage
 {
+    /// <summary>
+    /// Secure, file based storage which stores the access token in an encripted way in the app's local folder
+    /// </summary>
     public class SecureTokenStorage : ITokenStorage
     {
-        private const BinaryStringEncoding ENCODING = BinaryStringEncoding.Utf8;
+        private const BinaryStringEncoding Encoding = BinaryStringEncoding.Utf8;
         private readonly DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(Token));
         private const string TokenFileName = "rwth_access_token";
         private const string FileExtension = ".txt";
@@ -38,7 +36,7 @@ namespace L2PAccess.Authentication.Storage
             {
                 serializer.WriteObject(ms, token);
                 var bytes = ms.ToArray();
-                await SaveAccessToken(Encoding.UTF8.GetString(bytes, 0, bytes.Length));
+                await SaveAccessToken(System.Text.Encoding.UTF8.GetString(bytes, 0, bytes.Length));
             }
         }
 
@@ -49,7 +47,7 @@ namespace L2PAccess.Authentication.Storage
             if (string.IsNullOrEmpty(json))
                 throw new IOException();
 
-            using (MemoryStream ms = new MemoryStream(Encoding.UTF8.GetBytes(json)))
+            using (MemoryStream ms = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(json)))
             {
                 return (Token)serializer.ReadObject(ms);
             }
@@ -66,17 +64,17 @@ namespace L2PAccess.Authentication.Storage
                 return string.Empty;
 
 
-            DataProtectionProvider Provider = new DataProtectionProvider();
-            IBuffer buffUnprotected = await Provider.UnprotectAsync(text);
+            DataProtectionProvider provider = new DataProtectionProvider();
+            IBuffer buffUnprotected = await provider.UnprotectAsync(text);
 
-            return CryptographicBuffer.ConvertBinaryToString(ENCODING, buffUnprotected);
+            return CryptographicBuffer.ConvertBinaryToString(Encoding, buffUnprotected);
         }
 
         public async Task<IStorageFile> SaveAccessToken(string token)
         {
-            DataProtectionProvider Provider = new DataProtectionProvider("LOCAL=user");
-            IBuffer buffMsg = CryptographicBuffer.ConvertStringToBinary(token, ENCODING);
-            IBuffer buffProtected = await Provider.ProtectAsync(buffMsg);
+            DataProtectionProvider provider = new DataProtectionProvider("LOCAL=user");
+            IBuffer buffMsg = CryptographicBuffer.ConvertStringToBinary(token, Encoding);
+            IBuffer buffProtected = await provider.ProtectAsync(buffMsg);
 
             StorageFolder local = ApplicationData.Current.LocalFolder;
             var file = await local.CreateFileAsync(TokenFileName + FileExtension, CreationCollisionOption.ReplaceExisting);

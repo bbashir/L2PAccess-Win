@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using L2PAccess.Authentication.Model;
+﻿using System.Threading.Tasks;
 using L2PAccess.Authentication.Model.Request;
 using L2PAccess.Authentication.Model.Response;
 using Refit;
 
 namespace L2PAccess.Authentication
 {
+    /// <summary>
+    /// RWTH Aachen's OAuth interface.
+    /// </summary>
     public interface IRwthOauth
     {
         [Post("/oauth2waitress/oauth2.svc/code")]

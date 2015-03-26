@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using L2PAccess.Authentication.Model;
+﻿using System.Threading.Tasks;
 using L2PAccess.Authentication.Model.Response;
 
 namespace L2PAccess.Authentication.Storage
 {
+    /// <summary>
+    /// Access token storage interface
+    /// </summary>
     public interface ITokenStorage
     {
         Task Save(string accessToken, string refreshToken, string accessTokenExpiration);
