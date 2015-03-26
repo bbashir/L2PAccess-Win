@@ -12,17 +12,17 @@ Table of Contents
 - Welcome at the L2PAccess project!
 	- [Usage](#usage)
 		- [Add to your project](#add-to-your-project)
-			- [Step 1 - Download](#step-1-download)
-			- [Step 2 - Include in solution](#step-2-include-in-solution)
-			- [Step 3 - Reference it](#step-3-reference-it)
+			- [Step 1 - Download](#step-1---download)
+			- [Step 2 - Include in solution](#step-2---include-in-solution)
+			- [Step 3 - Reference it](#step-3---reference-it)
 		- [How to use](#)
 			- [Configure](#configure)
 			- [Your first call](#your-first-call)
 			- [Enjoy](#enjoy)
 	- [Extend](#extend)
 		- [Adding L2P methods](#adding-l2p-methods)
-			- [Step 1 - Add to the API interface](#step-1-add-to-the-api-interface)
-			- [Step 2 - Extend the proxy client](#step-2-extend-the-proxy-client)
+			- [Step 1 - Add to the API interface](#step-1---add-to-the-api-interface)
+			- [Step 2 - Extend the proxy client](#step-2---extend-the-proxy-client)
 	- [In case of problems](#in-case-of-problems)
 
 Usage
