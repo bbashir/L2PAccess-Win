@@ -34,7 +34,7 @@ namespace L2PAccess_Windows
 
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
-            var config = RwthConfig.Create("yJV0yVoAPZ3ykvnhZImWg61TBbMUBv7ZYI3zSo7XCaPlJKsMVOHBqBbbx7Ko5SXi.apps.rwth-aachen.de");
+            var config = RwthConfig.Create("YOUR CLIENT ID");
 
             var task1 = Task.Factory.StartNew(async () =>
             {
