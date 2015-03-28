@@ -9,6 +9,7 @@ using L2PAccess.Authentication.Model.Request;
 using L2PAccess.Authentication.Model.Response;
 using L2PAccess.Authentication.Storage;
 using L2PAccess.Authentication.Verification;
+using Nito.AsyncEx;
 using Refit;
 
 namespace L2PAccess.Authentication
@@ -23,10 +24,12 @@ namespace L2PAccess.Authentication
         protected IRwthOauth OauthClient;
         protected OAuthConfig Config;
         private UserCodeVerifier verifier;
+        private AsyncLazy<Token> lazyTokenRefresher;
 
         public OAuth2Module(OAuthConfig config)
         {
             Config = config;
+            InitLazyTokenRefresher();
         }
 
         public UserCodeVerifier Verifier
@@ -77,11 +80,11 @@ namespace L2PAccess.Authentication
 
         public async Task<Token> GetTokenAsync()
         {
-            if (Token.access_token == null || !Token.TokenIsNotExpired())
+            if (Token.access_token == null || Token.TokenIsExpired())
             {
                 if (Token.refresh_token != null)
                 {
-                    return await RefreshAccessToken();
+                    return await lazyTokenRefresher;
                 }
                 else
                 {
@@ -89,6 +92,11 @@ namespace L2PAccess.Authentication
                 }
             }
             return Token;
+        }
+
+        private void InitLazyTokenRefresher()
+        {
+            lazyTokenRefresher = new AsyncLazy<Token>(async () => await RefreshAccessToken());
         }
 
         protected virtual async Task<Token> RefreshAccessToken()
@@ -103,6 +111,7 @@ namespace L2PAccess.Authentication
             refreshed.expires_in = 3600;
             Token = refreshed;
             await TokenStorage.Save(Token);
+            InitLazyTokenRefresher();
             return Token;
         }
 

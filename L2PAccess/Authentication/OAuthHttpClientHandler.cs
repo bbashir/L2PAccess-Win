@@ -25,7 +25,7 @@ namespace L2PAccess.Authentication
             var authModule = await OAuthManager.Init(config);
 
                 Token token = await authModule.GetToken();
-                if (token != null && token.access_token != null && token.TokenIsNotExpired())
+                if (token != null && token.access_token != null && !token.TokenIsExpired())
                 {
                     if (config.InjectQueryParam)
                     {

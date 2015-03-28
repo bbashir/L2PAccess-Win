@@ -2,11 +2,9 @@
 using System.Net.Http;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using L2PAccess.API.Model;
 using Refit;
-using L2PAccess.Authentication.Model;
 using L2PAccess.Authentication.Model.Request;
 using L2PAccess.Authentication.Model.Response;
 

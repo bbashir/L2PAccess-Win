@@ -36,9 +36,20 @@ namespace L2PAccess_Windows
         {
             var config = RwthConfig.Create("yJV0yVoAPZ3ykvnhZImWg61TBbMUBv7ZYI3zSo7XCaPlJKsMVOHBqBbbx7Ko5SXi.apps.rwth-aachen.de");
 
-            var l2PClient = new L2PClient(config);
-            var viewAllCourseInfo = await l2PClient.ViewAllCourseInfo();
-            ResuListView.ItemsSource = viewAllCourseInfo.dataSet.Select(course => course.courseTitle);
+            var task1 = Task.Factory.StartNew(async () =>
+            {
+                var l2PClient = new L2PClient(config);
+                return await l2PClient.ViewAllCourseInfo();
+            }).Result;
+            var task2 = Task.Factory.StartNew(async () =>
+            {
+                var l2PClient = new L2PClient(config);
+                return await l2PClient.ViewAllCourseInfo();
+            }).Result;
+
+            var l2PResponses = await Task.WhenAll(task1, task2);
+
+            ResuListView.ItemsSource = l2PResponses[0].dataSet.Select(course => course.courseTitle);
         }
     }
 }
