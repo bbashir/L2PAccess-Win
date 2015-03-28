@@ -18,7 +18,7 @@ namespace L2PAccess.Authentication.Model.Response
             {
                 if (value != -1)
                 {
-                    accessTokenExpirationDate = new DateTime(Math.Min(DateTime.Now.AddSeconds(value).Ticks, DateTime.Now.AddMinutes(3).Ticks));
+                    accessTokenExpirationDate = new DateTime(Math.Min(DateTime.Now.AddSeconds(value).Ticks, DateTime.Now.AddMinutes(30).Ticks));
                 }
             }
         }
